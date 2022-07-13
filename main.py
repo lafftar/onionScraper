@@ -83,7 +83,6 @@ async def parse_urls(url: str, html: str, level: int = 1):
 
 
 async def crawl(url: str, level: int):
-    t1 = perf_counter()
 
     req: httpx.Request = httpx.Request(
         method='GET',
@@ -91,6 +90,7 @@ async def crawl(url: str, level: int):
     )
 
     async with req_sem:
+        t1 = perf_counter()
         async with await return_client() as c:
             global last_request_sent_ts
             last_request_sent_ts = time()
